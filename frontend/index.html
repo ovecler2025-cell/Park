@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faaliyet Uygulaması</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>FAALİYET</header>
+<div class="top-bar">
+  <div id="current-date"></div>
+  <div id="current-time"></div>
+  <div id="settings-btn" style="cursor:pointer;">⚙️</div>
+</div>
+<div class="tabs">
+  <div class="tab active" data-tab="park">Park</div>
+  <div class="tab" data-tab="personel">Personel</div>
+  <div class="tab" data-tab="evrak">Evrak</div>
+</div>
+<div id="cards-container"></div>
+<div class="fab" id="add-btn">+</div>
+
+<div class="modal" id="add-modal">
+  <div class="modal-content" id="add-content">
+    <h3>Yeni Kayıt</h3>
+    <form id="add-form" enctype="multipart/form-data">
+      <div id="add-fields"></div>
+      <div class="modal-buttons">
+        <button type="submit">Kaydet</button>
+        <button type="button" id="cancel-btn">İptal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
