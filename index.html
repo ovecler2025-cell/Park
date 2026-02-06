@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Park Faaliyet</title>
 <script type="module">
-  // Firebase SDK
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
   import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
   import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
@@ -23,6 +22,7 @@
   const db = getDatabase(app);
   const storage = getStorage(app);
 
+  // Yeni kayıt ekleme
   window.addEntry = async function() {
     const fileInput = document.getElementById("resim");
     const descInput = document.getElementById("aciklama");
@@ -33,14 +33,12 @@
       return;
     }
 
-    // Resmi Storage'a yükle
     const file = fileInput.files[0];
     const storageRef = sRef(storage, 'resimler/' + Date.now() + "_" + file.name);
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
 
-    // Veriyi Realtime Database'e kaydet
-    const newEntryRef = push(ref(db, 'personel'));
+    const newEntryRef = push(ref(db, 'parkfaaliyet'));
     await newEntryRef.set({
       tarih: dateInput.value,
       aciklama: descInput.value,
@@ -49,16 +47,13 @@
 
     alert("Kayıt başarılı!");
     loadEntries();
-    // Formu temizle
-    fileInput.value = "";
-    descInput.value = "";
-    dateInput.value = "";
   }
 
+  // Verileri çekip listeleme
   window.loadEntries = async function() {
     const list = document.getElementById("liste");
     list.innerHTML = "";
-    const snapshot = await get(ref(db, 'personel'));
+    const snapshot = await get(ref(db, 'parkfaaliyet'));
     if (snapshot.exists()) {
       const data = snapshot.val();
       Object.values(data).forEach(entry => {
@@ -76,7 +71,6 @@
     }
   }
 
-  // Sayfa açılır açılmaz verileri yükle
   window.onload = loadEntries;
 </script>
 </head>
