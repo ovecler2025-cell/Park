@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8B0000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Can Beyler">
+<meta name="description" content="Can Beyler — Kızarmış Piliç & Pilav">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title data-token="RESTAURANT_NAME">Can Beyler</title>
+
+<style>
+  :root {
+    --primary : #8B0000;
+    --accent  : #ff6600;
+    --gold    : #cc8800;
+    --bg      : #0d0500;
+    --bg2     : #1a0800;
+    --bg3     : #240c00;
+    --text    : #f0e6d3;
+    --muted   : #887766;
+    --border  : #3a1a00;
+    --green   : #22aa44;
+    --card-bg : rgba(26, 8, 0, 0.85);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #3a0000 0%, var(--primary) 40%, #aa1800 70%, #3a0000 100%);
+    padding: 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 30px rgba(139,0,0,0.7);
+    border-bottom: 3px solid var(--accent);
+    min-height: 70px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon { font-size: 34px; }
+  .brand-name {
+    font-size: 26px; font-weight: 900;
+    letter-spacing: 3px; color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .brand-tag {
+    font-size: 11px; color: #ffaa77;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .edit-btn {
+    background: rgba(255,102,0,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: all .2s;
+  }
+  .edit-btn:hover { background: rgba(255,102,0,0.25); }
+
+  /* ── PROMO BANNER ── */
+  .promo-banner {
+    background: linear-gradient(90deg, var(--primary), #cc2200, var(--primary));
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: 2px; color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    animation: pulseBg 3s ease-in-out infinite;
+  }
+  @keyframes pulseBg {
+    0%,100% { background: linear-gradient(90deg, #6a0000, #cc2200, #6a0000); }
+    50%      { background: linear-gradient(90deg, #aa0000, #ff3300, #aa0000); }
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 3px;
+    color: var(--accent); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── MENU GRID ── */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    margin-bottom: 36px;
+  }
+
+  /* ── MENU CARD ── */
+  .menu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    position: relative;
+  }
+  .menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(139,0,0,0.35);
+    border-color: #6a2a00;
+  }
+  .card-emoji {
+    font-size: 48px; text-align: center;
+    padding: 24px 20px 10px;
+    background: linear-gradient(180deg, rgba(139,0,0,0.12), transparent);
+  }
+  .card-body { padding: 0 18px 20px; }
+  .card-name {
+    font-size: 16px; font-weight: 800;
+    color: #fff; margin-bottom: 6px; line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px;
+  }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-price {
+    font-size: 22px; font-weight: 900; color: var(--accent);
+  }
+  .order-btn {
+    background: linear-gradient(135deg, var(--primary), #cc2200);
+    color: #fff; border: none;
+    padding: 8px 16px; border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: filter .2s;
+    text-decoration: none;
+  }
+  .order-btn:hover { filter: brightness(1.2); }
+
+  /* ── DELIVERY CARD ── */
+  .delivery-card {
+    background: linear-gradient(135deg, #3a0000 0%, #1a0000 100%);
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(139,0,0,0.3);
+  }
+  .delivery-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(255,102,0,0.08), transparent 60%);
+  }
+  .delivery-label {
+    font-size: 13px; letter-spacing: 4px;
+    color: var(--accent); font-weight: 700;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .delivery-phone {
+    font-size: 36px; font-weight: 900;
+    color: #fff; letter-spacing: 2px;
+    text-decoration: none; display: block;
+    text-shadow: 0 2px 10px rgba(255,102,0,0.4);
+    transition: color .2s;
+  }
+  .delivery-phone:hover { color: var(--accent); }
+  .whatsapp-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-top: 14px;
+  }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #128c3e; color: #fff;
+    padding: 10px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; transition: filter .2s;
+    border: none; cursor: pointer;
+  }
+  .whatsapp-btn:hover { filter: brightness(1.2); }
+
+  /* ── INFO ROW ── */
+  .info-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media(max-width:520px){ .info-row { grid-template-columns: 1fr; } }
+
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .info-icon { font-size: 28px; flex-shrink: 0; }
+  .info-content {}
+  .info-title-sm { font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
+  .info-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 24px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: #443322;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  /* ── PWA INSTALL ── */
+  .pwa-install-btn {
+    display: none;
+    align-items: center; gap: 8px;
+    background: rgba(255,102,0,0.1);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 7px 13px; border-radius: 8px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-brand">
+    <div class="brand-icon">🍗</div>
+    <div>
+      <div class="brand-name" data-token="RESTAURANT_NAME">CAN BEYLER</div>
+      <div class="brand-tag" data-token="TAGLINE">kızarmış piliç &amp; pilav</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="pwa-install-btn pwa-install-btn">📲 Yükle</button>
+    <a href="./editor.html" class="edit-btn">✏️ Düzenle</a>
+  </div>
+</header>
+
+<!-- PROMO -->
+<div class="promo-banner" data-token="PROMO_TEXT">
+  AÇILIŞA ÖZEL UYGUN FİYATLARLA HİZMETİNİZDEYİZ
+</div>
+
+<main class="main">
+
+  <!-- MENÜ -->
+  <div class="section-title">🍽️ Menümüz</div>
+  <div class="menu-grid">
+
+    <!-- KART 1 -->
+    <div class="menu-card">
+      <div class="card-emoji">🍚</div>
+      <div class="card-body">
+        <div class="card-name" data-token="MENU_1_NAME">TAVUKLU NOHUT PİLAV</div>
+        <div class="card-desc" data-token="MENU_1_DESC">Günlük taze tavuk, nohut ve buharda pilav</div>
+        <div class="card-footer">
+          <div class="card-price" data-token="MENU_1_PRICE">₺120</div>
+          <a href="#delivery" class="order-btn">Sipariş Ver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KART 2 -->
+    <div class="menu-card">
+      <div class="card-emoji">🍲</div>
+      <div class="card-body">
+        <div class="card-name" data-token="MENU_2_NAME">ÇORBA ÇEŞİTLERİ</div>
+        <div class="card-desc" data-token="MENU_2_DESC">Mercimek, domates, tarhana — her gün taze</div>
+        <div class="card-footer">
+          <div class="card-price" data-token="MENU_2_PRICE">₺65</div>
+          <a href="#delivery" class="order-btn">Sipariş Ver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KART 3 -->
+    <div class="menu-card">
+      <div class="card-emoji">🍗</div>
+      <div class="card-body">
+        <div class="card-name" data-token="MENU_3_NAME">KIZARMIŞ PİLİÇ</div>
+        <div class="card-desc" data-token="MENU_3_DESC">Çıtır çıtır, baharatlı, tam porsiyon</div>
+        <div class="card-footer">
+          <div class="card-price" data-token="MENU_3_PRICE">₺220</div>
+          <a href="#delivery" class="order-btn">Sipariş Ver</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KART 4 -->
+    <div class="menu-card">
+      <div class="card-emoji">🍖</div>
+      <div class="card-body">
+        <div class="card-name" data-token="MENU_4_NAME">KANAT MENU</div>
+        <div class="card-desc" data-token="MENU_4_DESC">6 adet kanat + patates kızartması</div>
+        <div class="card-footer">
+          <div class="card-price" data-token="MENU_4_PRICE">₺180</div>
+          <a href="#delivery" class="order-btn">Sipariş Ver</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ALO PAKET -->
+  <div class="section-title">📦 Paket Servis</div>
+  <div class="delivery-card" id="delivery">
+    <div class="delivery-label" data-token="DELIVERY_TITLE">ALO PAKET</div>
+    <a class="delivery-phone" id="phone-link" data-token="PHONE" href="tel:05336399706">
+      0533 639 97 06
+    </a>
+    <div class="whatsapp-row">
+      <a class="whatsapp-btn" id="wa-link" href="https://wa.me/905336399706" target="_blank">
+        💬 WhatsApp ile Sipariş
+      </a>
+    </div>
+  </div>
+
+  <!-- BİLGİ KARTLARI -->
+  <div class="section-title">📍 Bilgiler</div>
+  <div class="info-row">
+    <div class="info-card">
+      <div class="info-icon">📍</div>
+      <div class="info-content">
+        <div class="info-title-sm">Adres</div>
+        <div class="info-text">
+          <span data-token="ADDRESS_LINE1">Aldere Mah. Mehmet Ali Altun Cad. 397 Sok. No: 6/A</span><br>
+          <span data-token="ADDRESS_LINE2">Mamak / ANKARA</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🕐</div>
+      <div class="info-content">
+        <div class="info-title-sm">Çalışma Saatleri</div>
+        <div class="info-text">
+          <span data-token="HOURS_WEEKDAY">Pzt–Cmt: 10:00 – 22:00</span><br>
+          <span data-token="HOURS_WEEKEND">Pazar: 11:00 – 21:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">📸</div>
+      <div class="info-content">
+        <div class="info-title-sm">Instagram</div>
+        <div class="info-text">
+          <a id="ig-link" href="#" style="color:var(--accent); text-decoration:none;" data-token="INSTAGRAM">@canbeyler</a>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">📱</div>
+      <div class="info-content">
+        <div class="info-title-sm">WhatsApp</div>
+        <div class="info-text" data-token="WHATSAPP">0533 639 97 06</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <span data-token="RESTAURANT_NAME">Can Beyler</span> &copy; 2025 &nbsp;|&nbsp;
+  <a href="./editor.html">✏️ Menü Düzenle</a>
+</footer>
+
+<script src="./app.js"></script>
+<script>
+  // Tokenları yükle ve DOM'a uygula
+  const tokens = getTokens();
+  applyTokensToDOM(tokens);
+
+  // Telefon ve WhatsApp linklerini güncelle
+  function updateLinks() {
+    const phone = tokens.PHONE.replace(/\s/g, '');
+    const intlPhone = phone.startsWith('0') ? '90' + phone.slice(1) : phone;
+    const phoneLinkEl = document.getElementById('phone-link');
+    if (phoneLinkEl) phoneLinkEl.href = 'tel:' + phone;
+    const waLinkEl = document.getElementById('wa-link');
+    if (waLinkEl) waLinkEl.href = 'https://wa.me/' + intlPhone;
+    const igLinkEl = document.getElementById('ig-link');
+    if (igLinkEl) {
+      const ig = tokens.INSTAGRAM.replace('@','');
+      igLinkEl.href = 'https://instagram.com/' + ig;
+    }
+  }
+  updateLinks();
+</script>
+</body>
+</html>

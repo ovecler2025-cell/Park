@@ -1,0 +1,36 @@
+{
+  "name": "Can Beyler — Broşür & Menü",
+  "short_name": "Can Beyler",
+  "description": "Restoran broşürü ve menü yönetim uygulaması",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0500",
+  "theme_color": "#8B0000",
+  "categories": ["food", "business"],
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Menüyü Düzenle",
+      "short_name": "Düzenle",
+      "description": "Token editörünü aç",
+      "url": "./editor.html",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
