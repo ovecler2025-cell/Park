@@ -1,226 +1,189 @@
-// ══════════════════════════════════════════
-//  app.js — Merkezi uygulama mantığı
-// ══════════════════════════════════════════
+// ══════════════════════════════════════════════
+//  app.js  —  Can Beyler PWA  —  Merkezi Mantık
+// ══════════════════════════════════════════════
 
-// ── Varsayılan Tokenlar ──────────────────
-const DEFAULT_TOKENS = {
-  RESTAURANT_NAME : 'CAN BEYLER',
-  TAGLINE         : 'Kızarmış Piliç & Pilav',
-  PROMO_TEXT      : 'AÇILIŞA ÖZEL UYGUN FİYATLARLA HİZMETİNİZDEYİZ',
-
-  MENU_1_NAME  : 'Tavuklu Nohut Pilav',
-  MENU_1_PRICE : '120',
-  MENU_1_DESC  : 'Günlük taze tavuk, nohut ve buharda pilav',
-  MENU_1_EMOJI : '🍚',
-
-  MENU_2_NAME  : 'Çorba Çeşitleri',
-  MENU_2_PRICE : '65',
-  MENU_2_DESC  : 'Mercimek, domates, tarhana — her gün taze',
-  MENU_2_EMOJI : '🍲',
-
-  MENU_3_NAME  : 'Kızarmış Piliç',
-  MENU_3_PRICE : '220',
-  MENU_3_DESC  : 'Çıtır çıtır, baharatlı, tam porsiyon',
-  MENU_3_EMOJI : '🍗',
-
-  MENU_4_NAME  : 'Kanat Menü',
-  MENU_4_PRICE : '180',
-  MENU_4_DESC  : '6 adet kanat + patates kızartması',
-  MENU_4_EMOJI : '🍖',
-
-  PHONE        : '05336399706',
-  WHATSAPP     : '905336399706',
-  ADDRESS      : 'Aldere Mah. Mehmet Ali Altun Cad. 397 Sok. No: 6/A Mamak/ANKARA',
-  MAPS_QUERY   : 'Can+Beyler+Mamak+Ankara',
-
-  HOURS_1      : 'Pzt – Cmt: 10:00 – 22:00',
-  HOURS_2      : 'Pazar: 11:00 – 21:00',
-
-  PRIMARY      : '#8B0000',
-  ACCENT       : '#ff6600',
+// ── Storage Anahtarları ───────────────────────
+const SK = {
+  INFO    : 'cb_info_v3',
+  MENU    : 'cb_menu_v3',
+  IMAGES  : 'cb_imgs_v3',
+  CART    : 'cb_cart_v3',
+  PAYMENT : 'cb_pay_v3',
 };
 
-const TOKEN_META = {
-  RESTAURANT_NAME : { label:'Restoran Adı',        group:'Restoran', type:'text'     },
-  TAGLINE         : { label:'Alt Başlık',           group:'Restoran', type:'text'     },
-  PROMO_TEXT      : { label:'Kampanya Metni',       group:'Restoran', type:'textarea' },
-
-  MENU_1_NAME  : { label:'Menü 1 Adı',           group:'Menü 1', type:'text'     },
-  MENU_1_PRICE : { label:'Menü 1 Fiyat (₺)',      group:'Menü 1', type:'number'   },
-  MENU_1_DESC  : { label:'Menü 1 Açıklama',       group:'Menü 1', type:'textarea' },
-  MENU_1_EMOJI : { label:'Menü 1 Emoji',          group:'Menü 1', type:'text'     },
-
-  MENU_2_NAME  : { label:'Menü 2 Adı',           group:'Menü 2', type:'text'     },
-  MENU_2_PRICE : { label:'Menü 2 Fiyat (₺)',      group:'Menü 2', type:'number'   },
-  MENU_2_DESC  : { label:'Menü 2 Açıklama',       group:'Menü 2', type:'textarea' },
-  MENU_2_EMOJI : { label:'Menü 2 Emoji',          group:'Menü 2', type:'text'     },
-
-  MENU_3_NAME  : { label:'Menü 3 Adı',           group:'Menü 3', type:'text'     },
-  MENU_3_PRICE : { label:'Menü 3 Fiyat (₺)',      group:'Menü 3', type:'number'   },
-  MENU_3_DESC  : { label:'Menü 3 Açıklama',       group:'Menü 3', type:'textarea' },
-  MENU_3_EMOJI : { label:'Menü 3 Emoji',          group:'Menü 3', type:'text'     },
-
-  MENU_4_NAME  : { label:'Menü 4 Adı',           group:'Menü 4', type:'text'     },
-  MENU_4_PRICE : { label:'Menü 4 Fiyat (₺)',      group:'Menü 4', type:'number'   },
-  MENU_4_DESC  : { label:'Menü 4 Açıklama',       group:'Menü 4', type:'textarea' },
-  MENU_4_EMOJI : { label:'Menü 4 Emoji',          group:'Menü 4', type:'text'     },
-
-  PHONE        : { label:'Telefon (0xxx...)',     group:'İletişim', type:'tel'  },
-  WHATSAPP     : { label:'WhatsApp (90xxx...)',   group:'İletişim', type:'tel'  },
-  ADDRESS      : { label:'Adres',                group:'İletişim', type:'textarea' },
-  MAPS_QUERY   : { label:'Google Maps Arama',    group:'İletişim', type:'text' },
-  HOURS_1      : { label:'Saat Satır 1',         group:'Saatler',  type:'text' },
-  HOURS_2      : { label:'Saat Satır 2',         group:'Saatler',  type:'text' },
-  PRIMARY      : { label:'Ana Renk',             group:'Tema',     type:'color' },
-  ACCENT       : { label:'Vurgu Rengi',          group:'Tema',     type:'color' },
+// ── Varsayılan Restoran Bilgileri ─────────────
+const DEF_INFO = {
+  name      : 'Can Beyler',
+  tagline   : 'Kızarmış Piliç & Pilav',
+  promo     : 'AÇILIŞA ÖZEL UYGUN FİYATLARLA HİZMETİNİZDEYİZ',
+  phone     : '05336399706',
+  whatsapp  : '905336399706',
+  address   : 'Aldere Mah. Mehmet Ali Altun Cad. 397 Sok. No: 6/A Mamak/ANKARA',
+  mapsQuery : 'Can+Beyler+Mamak+Ankara',
+  hours1    : 'Pzt – Cmt: 10:00 – 22:00',
+  hours2    : 'Pazar: 11:00 – 21:00',
+  primary   : '#8B0000',
+  accent    : '#ff6600',
 };
 
-// ── localStorage anahtar adları ──────────
-const KEYS = {
-  TOKENS : 'cb_tokens_v2',
-  IMAGES : 'cb_images_v2',
-  CART   : 'cb_cart_v2',
+// ── Varsayılan Kategoriler ────────────────────
+const DEF_CATS = [
+  { id:'yemek',    label:'Yemekler',          emoji:'🍽️', active:true },
+  { id:'icecek',   label:'İçecekler',         emoji:'🥤',  active:true },
+  { id:'kampanya', label:'Kampanyalı Menüler', emoji:'🔥', active:true },
+];
+
+// ── Varsayılan Menü Ürünleri ──────────────────
+const DEF_ITEMS = [
+  { id:'i1', catId:'yemek',    name:'Tavuklu Nohut Pilav', price:'120', desc:'Günlük taze tavuk, nohut ve buharda pilav',   emoji:'🍚', active:true, badge:''        },
+  { id:'i2', catId:'yemek',    name:'Kızarmış Piliç',       price:'220', desc:'Çıtır çıtır, baharatlı, tam porsiyon',       emoji:'🍗', active:true, badge:''        },
+  { id:'i3', catId:'yemek',    name:'Kanat Menü',           price:'180', desc:'6 adet kanat + patates kızartması',          emoji:'🍖', active:true, badge:''        },
+  { id:'i4', catId:'yemek',    name:'Çorba Çeşitleri',      price:'65',  desc:'Mercimek, domates, tarhana — her gün taze', emoji:'🍲', active:true, badge:''        },
+  { id:'i5', catId:'icecek',   name:'Ayran',                price:'20',  desc:'Soğuk, taze ayran',                         emoji:'🥛', active:true, badge:''        },
+  { id:'i6', catId:'icecek',   name:'Kola / Gazoz',         price:'30',  desc:'Çeşitli meşrubatlar',                       emoji:'🥤', active:true, badge:''        },
+  { id:'i7', catId:'icecek',   name:'Su',                   price:'10',  desc:'0.5 lt soğuk su',                           emoji:'💧', active:true, badge:''        },
+  { id:'i8', catId:'kampanya', name:'Aile Paketi',           price:'450', desc:'1 tam piliç + 2 pilav + 2 çorba + 4 ayran', emoji:'👨‍👩‍👧‍👦', active:true, badge:'EN İYİ' },
+  { id:'i9', catId:'kampanya', name:'İkili Menü',            price:'280', desc:'2 x tavuklu pilav + 2 ayran',              emoji:'👫', active:true, badge:'FIRSАТ'   },
+];
+
+// ── Varsayılan Ödeme Ayarları ─────────────────
+const DEF_PAY = {
+  cardEnabled   : false,
+  provider      : 'iyzico',   // iyzico | paytr | stripe | link
+  paymentUrl    : '',          // Hosted ödeme sayfası URL
+  apiNote       : '',          // Yönetici notu
+  onDelivery    : true,        // Kapıda ödeme
+  onDeliveryCard: false,       // Kapıda kart
 };
 
-// ── Token işlemleri ──────────────────────
-function getTokens() {
+// ═══════════════════════════════════════════════
+//  VERİ OKUMA / YAZMA
+// ═══════════════════════════════════════════════
+
+function getInfo()    { try { const s=localStorage.getItem(SK.INFO);    return s?Object.assign({},DEF_INFO,JSON.parse(s)):Object.assign({},DEF_INFO);   }catch{return Object.assign({},DEF_INFO);   } }
+function saveInfo(v)  { try { localStorage.setItem(SK.INFO,   JSON.stringify(v)); return true; }catch{return false;} }
+
+function getMenu() {
   try {
-    const s = localStorage.getItem(KEYS.TOKENS);
-    return s ? Object.assign({}, DEFAULT_TOKENS, JSON.parse(s)) : Object.assign({}, DEFAULT_TOKENS);
-  } catch { return Object.assign({}, DEFAULT_TOKENS); }
+    const s = localStorage.getItem(SK.MENU);
+    if (s) {
+      const d = JSON.parse(s);
+      return { cats: d.cats || [...DEF_CATS], items: d.items || [...DEF_ITEMS] };
+    }
+  } catch {}
+  return { cats: structuredClone(DEF_CATS), items: structuredClone(DEF_ITEMS) };
 }
-function saveTokens(t) {
-  try { localStorage.setItem(KEYS.TOKENS, JSON.stringify(t)); return true; }
-  catch { return false; }
-}
-function resetTokens() { localStorage.removeItem(KEYS.TOKENS); }
+function saveMenu(v)  { try { localStorage.setItem(SK.MENU,JSON.stringify(v)); return true; }catch{return false;} }
 
-// ── Resim işlemleri ──────────────────────
-function getImages() {
-  try {
-    const s = localStorage.getItem(KEYS.IMAGES);
-    return s ? JSON.parse(s) : {};
-  } catch { return {}; }
-}
-function saveImages(imgs) {
-  try { localStorage.setItem(KEYS.IMAGES, JSON.stringify(imgs)); return true; }
-  catch(e) {
-    console.warn('Resim kaydedilemedi:', e);
-    return false;
-  }
-}
+function getImages()  { try { const s=localStorage.getItem(SK.IMAGES);  return s?JSON.parse(s):{};       }catch{return {};} }
+function saveImages(v){ try { localStorage.setItem(SK.IMAGES,JSON.stringify(v)); return true; }catch{return false;} }
 
-// Resmi canvas'ta küçültüp sıkıştır
-function compressImage(file, maxW = 800, quality = 0.82) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = reject;
-    reader.onload = e => {
-      const img = new Image();
-      img.onerror = reject;
-      img.onload = () => {
-        const scale = Math.min(1, maxW / img.width);
-        const w = Math.round(img.width * scale);
-        const h = Math.round(img.height * scale);
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        resolve(canvas.toDataURL('image/jpeg', quality));
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
+function getPay()     { try { const s=localStorage.getItem(SK.PAYMENT); return s?Object.assign({},DEF_PAY,JSON.parse(s)):Object.assign({},DEF_PAY); }catch{return Object.assign({},DEF_PAY);} }
+function savePay(v)   { try { localStorage.setItem(SK.PAYMENT,JSON.stringify(v)); return true; }catch{return false;} }
 
-// ── Sepet işlemleri ──────────────────────
-function getCart() {
-  try {
-    const s = localStorage.getItem(KEYS.CART);
-    return s ? JSON.parse(s) : [];
-  } catch { return []; }
-}
-function saveCart(cart) {
-  try { localStorage.setItem(KEYS.CART, JSON.stringify(cart)); }
-  catch {}
-}
-function clearCart() { localStorage.removeItem(KEYS.CART); }
+function getCart()    { try { const s=localStorage.getItem(SK.CART);    return s?JSON.parse(s):[]; }catch{return [];} }
+function saveCart(c)  { try { localStorage.setItem(SK.CART,JSON.stringify(c)); }catch{} }
+function clearCart()  { localStorage.removeItem(SK.CART); }
 
-function addToCart(item) {           // item: { id, name, price, emoji }
+// ═══════════════════════════════════════════════
+//  SEPET İŞLEMLERİ
+// ═══════════════════════════════════════════════
+
+function addToCart(item) {
   const cart = getCart();
-  const existing = cart.find(c => c.id === item.id);
-  if (existing) existing.qty += 1;
+  const ex = cart.find(c => c.id === item.id);
+  if (ex) ex.qty++;
   else cart.push({ ...item, qty: 1 });
   saveCart(cart);
-  return cart;
-}
-function removeFromCart(id) {
-  const cart = getCart().filter(c => c.id !== id);
-  saveCart(cart);
-  return cart;
+  return getCart();
 }
 function updateQty(id, qty) {
-  const cart = getCart();
-  const item = cart.find(c => c.id === id);
-  if (item) {
-    if (qty <= 0) return removeFromCart(id);
-    item.qty = qty;
-  }
+  let cart = getCart();
+  if (qty <= 0) cart = cart.filter(c => c.id !== id);
+  else { const it = cart.find(c => c.id === id); if (it) it.qty = qty; }
   saveCart(cart);
   return getCart();
 }
 function cartTotal(cart) {
-  return cart.reduce((sum, c) => sum + (parseFloat(c.price) * c.qty), 0);
+  return cart.reduce((s, c) => s + parseFloat(c.price || 0) * c.qty, 0);
+}
+function cartCount(cart) {
+  return cart.reduce((s, c) => s + c.qty, 0);
 }
 
-// ── WhatsApp sipariş linki ────────────────
-function buildWhatsAppOrderURL(cart, tokens) {
+// ═══════════════════════════════════════════════
+//  WHATSAPP SİPARİŞ URL
+// ═══════════════════════════════════════════════
+
+function buildWAUrl(cart, info, payMethod) {
   const lines = cart.map(c =>
-    `${c.emoji} *${c.name}* x${c.qty} — ₺${(parseFloat(c.price)*c.qty).toFixed(0)}`
+    `${c.emoji} *${c.name}* x${c.qty} → ₺${(parseFloat(c.price)*c.qty).toFixed(0)}`
   ).join('\n');
   const total = cartTotal(cart).toFixed(0);
-  const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(tokens.MAPS_QUERY || tokens.ADDRESS)}`;
-
+  const maps  = `https://maps.google.com/?q=${encodeURIComponent(info.mapsQuery||info.address)}`;
+  const payStr = payMethod === 'card'      ? '💳 Kart ile ödeme'
+               : payMethod === 'delivery'  ? '💵 Kapıda nakit'
+               : payMethod === 'card_del'  ? '💳 Kapıda kart'
+               : '—';
   const msg =
-`🛒 *${tokens.RESTAURANT_NAME} — Yeni Sipariş*
+`🛒 *${info.name} — Yeni Sipariş*
 
 ${lines}
 
 💰 *Toplam: ₺${total}*
+💳 Ödeme: ${payStr}
 
-📍 *Adres:* ${tokens.ADDRESS}
-🗺️ ${mapsUrl}
+📍 ${info.address}
+🗺️ ${maps}
 
-_Sipariş uygulamadan gönderildi._`;
+_Sipariş uygulamadan iletildi._`;
 
-  const wa = tokens.WHATSAPP.replace(/\D/g, '');
+  const wa = info.whatsapp.replace(/\D/g,'');
   return `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
 }
 
-// ── DOM'a token uygula ───────────────────
-function applyTokensToDOM(tokens) {
-  document.querySelectorAll('[data-token]').forEach(el => {
-    const k = el.dataset.token;
-    if (tokens[k] == null) return;
-    el.textContent = tokens[k];
-  });
-  // CSS değişkenleri
-  if (tokens.PRIMARY) document.documentElement.style.setProperty('--primary', tokens.PRIMARY);
-  if (tokens.ACCENT)  document.documentElement.style.setProperty('--accent',  tokens.ACCENT);
+// ═══════════════════════════════════════════════
+//  YARDIMCILAR
+// ═══════════════════════════════════════════════
+
+function uid() {
+  return 'i' + Math.random().toString(36).slice(2,9);
 }
 
-// ── PWA & Service Worker ─────────────────
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+async function compressImage(file, maxW=800, q=0.82) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onerror = rej;
+    r.onload = e => {
+      const img = new Image();
+      img.onerror = rej;
+      img.onload = () => {
+        const sc = Math.min(1, maxW/img.width);
+        const w  = Math.round(img.width*sc), h = Math.round(img.height*sc);
+        const cv = document.createElement('canvas');
+        cv.width=w; cv.height=h;
+        cv.getContext('2d').drawImage(img,0,0,w,h);
+        res(cv.toDataURL('image/jpeg',q));
+      };
+      img.src = e.target.result;
+    };
+    r.readAsDataURL(file);
   });
 }
-let _deferredInstall = null;
+
+function applyTheme(info) {
+  document.documentElement.style.setProperty('--primary', info.primary||'#8B0000');
+  document.documentElement.style.setProperty('--accent',  info.accent||'#ff6600');
+}
+
+// PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
-  _deferredInstall = e;
   document.querySelectorAll('.pwa-install-btn').forEach(b => {
-    b.style.display = 'inline-flex';
-    b.onclick = () => { _deferredInstall.prompt(); b.style.display = 'none'; };
+    b.style.display='inline-flex';
+    b.onclick=()=>{ e.prompt(); b.style.display='none'; };
   });
 });

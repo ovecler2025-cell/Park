@@ -9,425 +9,411 @@
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>Can Beyler</title>
 <style>
-:root{
-  --primary:#8B0000;--accent:#ff6600;
-  --bg:#0d0500;--bg2:#1a0800;--bg3:#240c00;
-  --text:#f0e6d3;--muted:#887766;--border:#3a1a00;
-  --green:#22aa44;--card:#1a0900;
-}
+:root{--primary:#8B0000;--accent:#ff6600;--bg:#0d0500;--bg2:#1a0800;--card:#180800;--text:#f0e6d3;--muted:#887766;--border:#3a1a00;--green:#22aa44;}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* ── HEADER ── */
-.header{
-  background:linear-gradient(135deg,#3a0000,var(--primary),#cc2200,var(--primary),#3a0000);
-  padding:0 16px;display:flex;align-items:center;justify-content:space-between;
-  min-height:64px;position:sticky;top:0;z-index:200;
-  box-shadow:0 4px 24px rgba(139,0,0,.7);border-bottom:2px solid var(--accent);
-}
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#3a0000,var(--primary),#cc2200,var(--primary),#3a0000);padding:0 14px;display:flex;align-items:center;justify-content:space-between;min-height:62px;position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(139,0,0,.7);border-bottom:2px solid var(--accent)}
 .brand{display:flex;align-items:center;gap:10px}
-.brand-ico{font-size:30px}
-.brand-name{font-size:22px;font-weight:900;letter-spacing:2px;color:#fff}
-.brand-tag{font-size:10px;color:#ffaa77;letter-spacing:2px}
-.hdr-right{display:flex;align-items:center;gap:10px}
+.brand-ico{font-size:28px}
+.brand-name{font-size:20px;font-weight:900;letter-spacing:2px;color:#fff}
+.brand-tag{font-size:10px;color:#ffaa77;letter-spacing:1.5px}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.ico-btn{width:40px;height:40px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;text-decoration:none;transition:transform .2s;flex-shrink:0}
+.ico-btn:hover{transform:scale(1.1)}
+.btn-phone{background:rgba(34,170,68,.2);color:#44dd66}
+.btn-wa{background:rgba(18,140,62,.2);color:#25d366}
+.cart-fab{position:relative;width:40px;height:40px;border-radius:50%;background:rgba(255,102,0,.18);border:1.5px solid var(--accent);color:var(--accent);font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cart-fab:hover{background:rgba(255,102,0,.32)}
+.cart-badge{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#fff;font-size:10px;font-weight:800;min-width:18px;height:18px;border-radius:9px;display:none;align-items:center;justify-content:center;padding:0 3px}
 
-/* Telefon & WA butonları */
-.icon-btn{
-  width:42px;height:42px;border-radius:50%;border:none;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;cursor:pointer;text-decoration:none;
-  transition:transform .2s,filter .2s;flex-shrink:0;
-}
-.icon-btn:hover{transform:scale(1.1)}
-.btn-phone{background:rgba(34,170,68,.25);color:#44dd66}
-.btn-wa{background:rgba(18,140,62,.25);color:#25d366}
+/* PROMO */
+.promo{background:linear-gradient(90deg,#6a0000,#cc2200,#6a0000);text-align:center;padding:11px 16px;font-size:13px;font-weight:800;letter-spacing:1.5px;color:#fff;animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.9}50%{opacity:1}}
 
-/* Sepet butonu */
-.cart-btn{
-  position:relative;width:42px;height:42px;border-radius:50%;
-  background:rgba(255,102,0,.2);border:1.5px solid var(--accent);
-  color:var(--accent);font-size:20px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.cart-btn:hover{background:rgba(255,102,0,.35)}
-.cart-badge{
-  position:absolute;top:-4px;right:-4px;
-  background:var(--accent);color:#fff;
-  font-size:10px;font-weight:800;
-  min-width:18px;height:18px;border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  padding:0 4px;
-  display:none;
-}
+/* CAT TABS */
+.cat-bar{display:flex;overflow-x:auto;background:#110500;border-bottom:2px solid var(--border);position:sticky;top:62px;z-index:100;scrollbar-width:none}
+.cat-bar::-webkit-scrollbar{display:none}
+.cat-tab{padding:11px 18px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.cat-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-/* ── PROMO ── */
-.promo{
-  background:linear-gradient(90deg,#6a0000,#cc2200,#6a0000);
-  text-align:center;padding:12px 16px;
-  font-size:13px;font-weight:800;letter-spacing:1.5px;color:#fff;
-  animation:pulse 3s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:.9}50%{opacity:1}}
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:22px 14px 110px}
+.cat-section{margin-bottom:36px}
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-/* ── MAIN ── */
-.main{max-width:960px;margin:0 auto;padding:24px 16px 100px}
-.section-label{
-  font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:3px;color:var(--accent);
-  margin-bottom:16px;display:flex;align-items:center;gap:10px;
-}
-.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+/* GRID */
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 
-/* ── MENU GRID ── */
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:32px}
+/* CARD */
+.item-card{background:var(--card);border:1px solid var(--border);border-radius:15px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;position:relative}
+.item-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(139,0,0,.3)}
 
-.menu-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  overflow:hidden;transition:transform .25s,box-shadow .25s;
-  display:flex;flex-direction:column;
-}
-.menu-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(139,0,0,.3)}
+/* BADGE */
+.item-badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-size:9px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:20px;z-index:2}
+.item-badge.best{background:#cc8800}
 
-.card-img-wrap{
-  width:100%;height:160px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#1f0800,#0d0500);
-  display:flex;align-items:center;justify-content:center;
-}
-.card-img{width:100%;height:100%;object-fit:cover;display:block}
-.card-emoji-placeholder{font-size:70px;opacity:.7}
+/* IMG */
+.item-img-wrap{width:100%;height:145px;overflow:hidden;position:relative;background:linear-gradient(135deg,#1f0800,#0d0500);display:flex;align-items:center;justify-content:center}
+.item-img{width:100%;height:100%;object-fit:cover}
+.item-emoji{font-size:62px;opacity:.65}
 
-.card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
-.card-name{font-size:15px;font-weight:800;color:#fff;margin-bottom:5px;line-height:1.3}
-.card-desc{font-size:11px;color:var(--muted);line-height:1.6;flex:1;margin-bottom:12px}
-.card-footer{display:flex;align-items:center;justify-content:space-between}
-.card-price{font-size:20px;font-weight:900;color:var(--accent)}
-.add-btn{
-  background:linear-gradient(135deg,var(--primary),#cc2200);
-  color:#fff;border:none;padding:8px 16px;border-radius:8px;
-  font-size:13px;font-weight:700;cursor:pointer;transition:filter .2s;
-}
+/* BODY */
+.item-body{padding:12px 14px;flex:1;display:flex;flex-direction:column}
+.item-name{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px;line-height:1.3}
+.item-desc{font-size:11px;color:var(--muted);line-height:1.55;flex:1;margin-bottom:10px}
+.item-foot{display:flex;align-items:center;justify-content:space-between}
+.item-price{font-size:19px;font-weight:900;color:var(--accent)}
+.add-btn{background:linear-gradient(135deg,var(--primary),#cc2200);color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
 .add-btn:hover{filter:brightness(1.2)}
-.add-btn.added{background:linear-gradient(135deg,#1a6b1a,#2da32d)}
+.add-btn.ok{background:linear-gradient(135deg,#1a6b1a,#2da32d)}
 
-/* ── BİLGİ ── */
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
-@media(max-width:500px){.info-grid{grid-template-columns:1fr}}
-.info-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:16px;display:flex;gap:12px;align-items:flex-start;
-}
-.info-ico{font-size:26px;flex-shrink:0}
-.info-t{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:4px}
+/* INFO */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+@media(max-width:480px){.info-grid{grid-template-columns:1fr}}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px;display:flex;gap:11px;align-items:flex-start}
+.info-ico{font-size:24px;flex-shrink:0}
+.info-t{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:1px;margin-bottom:3px}
 .info-v{font-size:12px;color:var(--muted);line-height:1.6}
 .info-v a{color:var(--accent);text-decoration:none}
 
-/* ── SEPET DRAWER ── */
-.cart-overlay{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;
-}
-.cart-overlay.open{display:block}
-.cart-drawer{
-  position:fixed;right:0;top:0;bottom:0;width:min(360px,100vw);
-  background:#160700;border-left:2px solid var(--primary);
-  display:flex;flex-direction:column;z-index:501;
-  transform:translateX(100%);transition:transform .3s ease;
-}
-.cart-drawer.open{transform:translateX(0)}
-
-.cart-head{
-  padding:18px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--border);flex-shrink:0;
-}
-.cart-title{font-size:16px;font-weight:800;color:#fff}
-.cart-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer}
-.cart-close:hover{color:#fff}
-
-.cart-items{flex:1;overflow-y:auto;padding:16px}
-.cart-items::-webkit-scrollbar{width:4px}
-.cart-items::-webkit-scrollbar-thumb{background:var(--primary);border-radius:2px}
-
+/* CART DRAWER */
+.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400}
+.ovl.on{display:block}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(360px,100vw);background:#160700;border-left:2px solid var(--primary);display:flex;flex-direction:column;z-index:401;transform:translateX(100%);transition:transform .3s ease}
+.drawer.on{transform:none}
+.drw-hd{padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0}
+.drw-title{font-size:15px;font-weight:800;color:#fff}
+.drw-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.drw-close:hover{color:#fff}
+.drw-items{flex:1;overflow-y:auto;padding:14px}
+.drw-items::-webkit-scrollbar{width:4px}
+.drw-items::-webkit-scrollbar-thumb{background:var(--primary);border-radius:2px}
 .cart-empty{text-align:center;padding:40px 20px;color:var(--muted)}
-.cart-empty-ico{font-size:48px;margin-bottom:12px}
+.cart-empty-ico{font-size:48px;margin-bottom:10px}
+.ci{display:flex;align-items:center;gap:10px;padding:11px;background:rgba(30,8,0,.9);border:1px solid var(--border);border-radius:10px;margin-bottom:7px}
+.ci-e{font-size:26px;flex-shrink:0}
+.ci-inf{flex:1;min-width:0}
+.ci-name{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-price{font-size:11px;color:var(--accent)}
+.ci-qty{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.qb{width:24px;height:24px;border-radius:50%;border:1px solid #3a1a00;background:rgba(0,0,0,.5);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.qb:hover{background:var(--primary)}
+.qn{font-size:13px;font-weight:700;color:#fff;min-width:18px;text-align:center}
 
-.cart-item{
-  display:flex;align-items:center;gap:12px;
-  padding:12px;background:rgba(30,8,0,.8);
-  border:1px solid var(--border);border-radius:10px;margin-bottom:8px;
-}
-.ci-emoji{font-size:28px;flex-shrink:0}
-.ci-info{flex:1;min-width:0}
-.ci-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-price{font-size:12px;color:var(--accent)}
-.ci-qty{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.qty-btn{
-  width:26px;height:26px;border-radius:50%;
-  border:1px solid #3a1a00;background:rgba(0,0,0,.4);
-  color:#fff;font-size:14px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:background .2s;
-}
-.qty-btn:hover{background:var(--primary)}
-.qty-num{font-size:14px;font-weight:700;color:#fff;min-width:20px;text-align:center}
+/* CART FOOTER */
+.drw-ft{padding:14px;border-top:1px solid var(--border);flex-shrink:0}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.total-lbl{font-size:13px;color:var(--muted)}
+.total-val{font-size:22px;font-weight:900;color:var(--accent)}
 
-.cart-foot{padding:16px;border-top:1px solid var(--border);flex-shrink:0}
-.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.cart-total-label{font-size:13px;color:var(--muted)}
-.cart-total-val{font-size:22px;font-weight:900;color:var(--accent)}
-.checkout-btn{
-  width:100%;padding:15px;
-  background:linear-gradient(135deg,#128c3e,#1aad52);
-  border:none;border-radius:12px;color:#fff;
-  font-size:16px;font-weight:800;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:filter .2s;
-}
-.checkout-btn:hover{filter:brightness(1.12)}
-.checkout-btn:disabled{background:#333;color:#555;cursor:not-allowed}
-.clear-btn{
-  width:100%;padding:9px;margin-top:8px;
-  background:transparent;border:1px solid #333;border-radius:10px;
-  color:#555;font-size:12px;cursor:pointer;transition:all .2s;
-}
-.clear-btn:hover{border-color:#aa2222;color:#aa2222}
+/* ÖDEME SEÇİMİ */
+.pay-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.pay-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.pay-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s;background:rgba(10,3,0,.6)}
+.pay-opt:hover{border-color:#5a2a00}
+.pay-opt.sel{border-color:var(--accent);background:rgba(255,102,0,.1)}
+.pay-opt input{display:none}
+.pay-opt-ico{font-size:20px;flex-shrink:0}
+.pay-opt-info{flex:1}
+.pay-opt-name{font-size:13px;font-weight:700;color:#ddc8aa}
+.pay-opt-sub{font-size:11px;color:var(--muted)}
+.pay-radio{width:16px;height:16px;border-radius:50%;border:2px solid #5a3a00;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.pay-opt.sel .pay-radio{border-color:var(--accent);background:var(--accent)}
+.pay-opt.sel .pay-radio::after{content:'';width:6px;height:6px;background:#fff;border-radius:50%}
 
-/* ── TOAST ── */
-#toast{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-  background:var(--green);color:#fff;padding:11px 22px;border-radius:30px;
-  font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;
-  z-index:9999;pointer-events:none;white-space:nowrap;
-}
-#toast.show{opacity:1}
+.order-btn{width:100%;padding:14px;background:linear-gradient(135deg,#128c3e,#1aad52);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:filter .2s}
+.order-btn:hover{filter:brightness(1.1)}
+.order-btn:disabled{background:#222;color:#444;cursor:not-allowed;filter:none}
+.card-btn{width:100%;padding:14px;background:linear-gradient(135deg,#1a3a8a,#2255cc);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px;transition:filter .2s}
+.card-btn:hover{filter:brightness(1.1)}
+.card-btn:disabled{background:#222;color:#444;cursor:not-allowed;filter:none}
+.clear-link{width:100%;padding:8px;margin-top:6px;background:transparent;border:1px solid #222;border-radius:10px;color:#443322;font-size:12px;cursor:pointer;transition:all .2s}
+.clear-link:hover{border-color:#aa2222;color:#aa2222}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;z-index:9999;pointer-events:none;white-space:nowrap}
+#toast.on{opacity:1}
+#toast.err{background:#cc2222}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
+<header class="hdr">
   <div class="brand">
     <div class="brand-ico">🍗</div>
     <div>
-      <div class="brand-name" data-token="RESTAURANT_NAME">Can Beyler</div>
-      <div class="brand-tag" data-token="TAGLINE">Kızarmış Piliç & Pilav</div>
+      <div class="brand-name" id="hdr-name">Can Beyler</div>
+      <div class="brand-tag" id="hdr-tag">Kızarmış Piliç &amp; Pilav</div>
     </div>
   </div>
-  <div class="hdr-right">
-    <button class="pwa-install-btn icon-btn" style="display:none;background:rgba(255,255,255,.1);color:#fff" title="Uygulamayı Yükle">📲</button>
-    <a id="hdr-phone" href="#" class="icon-btn btn-phone" title="Ara">📞</a>
-    <a id="hdr-wa" href="#" class="icon-btn btn-wa" target="_blank" title="WhatsApp">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.878-1.42A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.184-1.188l-.3-.18-3.1.9.924-3.02-.196-.31A8 8 0 1112 20z"/>
-      </svg>
+  <div class="hdr-r">
+    <button class="pwa-install-btn ico-btn" style="display:none;background:rgba(255,255,255,.1);color:#fff">📲</button>
+    <a id="btn-phone" href="#" class="ico-btn btn-phone" title="Ara">📞</a>
+    <a id="btn-wa" href="#" class="ico-btn btn-wa" target="_blank" title="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.878-1.42A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.184-1.188l-.3-.18-3.1.9.924-3.02-.196-.31A8 8 0 1112 20z"/></svg>
     </a>
-    <button class="cart-btn" id="cart-btn" onclick="openCart()">
-      🛒
-      <span class="cart-badge" id="cart-badge">0</span>
+    <button class="cart-fab" id="cart-fab">
+      🛒<span class="cart-badge" id="cart-badge"></span>
     </button>
   </div>
 </header>
 
-<!-- PROMO -->
-<div class="promo" data-token="PROMO_TEXT">AÇILIŞA ÖZEL UYGUN FİYATLARLA HİZMETİNİZDEYİZ</div>
+<div class="promo" id="promo-txt">AÇILIŞA ÖZEL UYGUN FİYATLARLA HİZMETİNİZDEYİZ</div>
 
-<main class="main">
-  <div class="section-label">🍽️ Menümüz</div>
+<!-- KATEGORİ SEKMELERİ -->
+<div class="cat-bar" id="cat-bar"></div>
 
-  <!-- MENU GRID -->
-  <div class="menu-grid" id="menu-grid">
-    <!-- JS doldurur -->
-  </div>
-
-  <!-- BİLGİ -->
-  <div class="section-label">📍 Bilgiler</div>
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="info-ico">📞</div>
-      <div>
-        <div class="info-t">Telefon</div>
-        <div class="info-v"><a id="info-phone" href="#">0533 639 97 06</a></div>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-ico">💬</div>
-      <div>
-        <div class="info-t">WhatsApp</div>
-        <div class="info-v"><a id="info-wa" href="#" target="_blank">Mesaj Gönder</a></div>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-ico">📍</div>
-      <div>
-        <div class="info-t">Adres</div>
-        <div class="info-v"><a id="info-maps" href="#" target="_blank" data-token="ADDRESS">—</a></div>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="info-ico">🕐</div>
-      <div>
-        <div class="info-t">Çalışma Saatleri</div>
-        <div class="info-v">
-          <span data-token="HOURS_1">—</span><br>
-          <span data-token="HOURS_2">—</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-
-<!-- SEPET OVERLAY -->
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<main class="main" id="main"></main>
 
 <!-- SEPET DRAWER -->
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-head">
-    <div class="cart-title">🛒 Sepetiniz</div>
-    <button class="cart-close" onclick="closeCart()">✕</button>
+<div class="ovl" id="ovl" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drw-hd">
+    <div class="drw-title">🛒 Sepetiniz</div>
+    <button class="drw-close" onclick="closeCart()">✕</button>
   </div>
-  <div class="cart-items" id="cart-items"></div>
-  <div class="cart-foot">
-    <div class="cart-total-row">
-      <span class="cart-total-label">Toplam:</span>
-      <span class="cart-total-val" id="cart-total-val">₺0</span>
+  <div class="drw-items" id="drw-items"></div>
+  <div class="drw-ft">
+    <div class="total-row">
+      <span class="total-lbl">Toplam</span>
+      <span class="total-val" id="total-val">₺0</span>
     </div>
-    <button class="checkout-btn" id="checkout-btn" onclick="checkout()">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.878-1.42A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.184-1.188l-.3-.18-3.1.9.924-3.02-.196-.31A8 8 0 1112 20z"/>
-      </svg>
+
+    <!-- ÖDEME SEÇENEKLERİ -->
+    <div class="pay-title">Ödeme Yöntemi</div>
+    <div class="pay-opts" id="pay-opts">
+      <!-- JS doldurur -->
+    </div>
+
+    <button class="order-btn" id="order-wa-btn" disabled>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.878-1.42A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.184-1.188l-.3-.18-3.1.9.924-3.02-.196-.31A8 8 0 1112 20z"/></svg>
       WhatsApp ile Sipariş Ver
     </button>
-    <button class="clear-btn" onclick="clearCartUI()">🗑️ Sepeti Temizle</button>
+    <button class="card-btn" id="order-card-btn" style="display:none" disabled>
+      💳 Kart ile Öde
+    </button>
+    <button class="clear-link" onclick="doClear()">🗑️ Sepeti Temizle</button>
   </div>
 </div>
 
 <div id="toast"></div>
-
 <script src="./app.js"></script>
 <script>
-// ── Init ─────────────────────────────────
-const T   = getTokens();
-const IMG = getImages();
+// ── Veri ──────────────────────────────────────
+const INFO  = getInfo();
+const MENU  = getMenu();
+const IMGS  = getImages();
+const PAY   = getPay();
 
-applyTokensToDOM(T);
+// ── Tema & Header ─────────────────────────────
+applyTheme(INFO);
+document.getElementById('hdr-name').textContent = INFO.name;
+document.getElementById('hdr-tag').textContent  = INFO.tagline;
+document.getElementById('promo-txt').textContent = INFO.promo;
+document.title = INFO.name;
 
-// Linkleri güncelle
-const phone = T.PHONE.replace(/\D/g,'');
-const wa    = T.WHATSAPP.replace(/\D/g,'');
-const maps  = `https://maps.google.com/?q=${encodeURIComponent(T.MAPS_QUERY||T.ADDRESS)}`;
+const phone = INFO.phone.replace(/\D/g,'');
+const wa    = INFO.whatsapp.replace(/\D/g,'');
+document.getElementById('btn-phone').href = `tel:${phone}`;
+document.getElementById('btn-wa').href    = `https://wa.me/${wa}`;
 
-document.getElementById('hdr-phone').href  = `tel:${phone}`;
-document.getElementById('hdr-wa').href     = `https://wa.me/${wa}`;
-document.getElementById('info-phone').href = `tel:${phone}`;
-document.getElementById('info-phone').textContent = T.PHONE;
-document.getElementById('info-wa').href    = `https://wa.me/${wa}`;
-document.getElementById('info-maps').href  = maps;
+// ── KATEGORİLER ───────────────────────────────
+const cats    = MENU.cats.filter(c => c.active);
+const items   = MENU.items.filter(i => i.active);
+let activeCat = cats[0]?.id || '';
 
-// ── Menü Kartlarını Oluştur ───────────────
-const menuItems = [1,2,3,4].map(i => ({
-  id    : `MENU_${i}`,
-  name  : T[`MENU_${i}_NAME`],
-  price : T[`MENU_${i}_PRICE`],
-  desc  : T[`MENU_${i}_DESC`],
-  emoji : T[`MENU_${i}_EMOJI`],
-  img   : IMG[`MENU_${i}`] || null,
-}));
-
-const grid = document.getElementById('menu-grid');
-menuItems.forEach(item => {
-  const card = document.createElement('div');
-  card.className = 'menu-card';
-  card.innerHTML = `
-    <div class="card-img-wrap">
-      ${item.img
-        ? `<img class="card-img" src="${item.img}" alt="${item.name}">`
-        : `<div class="card-emoji-placeholder">${item.emoji}</div>`}
-    </div>
-    <div class="card-body">
-      <div class="card-name">${item.name}</div>
-      <div class="card-desc">${item.desc}</div>
-      <div class="card-footer">
-        <div class="card-price">₺${item.price}</div>
-        <button class="add-btn" data-id="${item.id}">+ Ekle</button>
-      </div>
-    </div>`;
-  card.querySelector('.add-btn').addEventListener('click', function(){
-    addToCart({ id:item.id, name:item.name, price:item.price, emoji:item.emoji });
-    renderCart();
-    showToast(`${item.emoji} ${item.name} sepete eklendi`);
-    this.textContent = '✓ Eklendi';
-    this.classList.add('added');
-    setTimeout(()=>{ this.textContent='+ Ekle'; this.classList.remove('added'); },1200);
+const catBar = document.getElementById('cat-bar');
+cats.forEach(cat => {
+  const cnt = items.filter(i => i.catId === cat.id).length;
+  if (!cnt) return;
+  const tab = document.createElement('div');
+  tab.className = 'cat-tab' + (cat.id === activeCat ? ' active' : '');
+  tab.innerHTML = `${cat.emoji} ${cat.label}`;
+  tab.addEventListener('click', () => {
+    activeCat = cat.id;
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.cat-section').forEach(s => {
+      s.style.display = s.dataset.cat === cat.id ? '' : 'none';
+    });
+    document.querySelector(`[data-cat="${cat.id}"]`)?.scrollIntoView({ behavior:'smooth', block:'start' });
   });
-  grid.appendChild(card);
+  catBar.appendChild(tab);
 });
 
-// ── Sepet ─────────────────────────────────
-function renderCart(){
-  const cart = getCart();
-  const badge = document.getElementById('cart-badge');
-  const total = cartTotal(cart);
-  const count = cart.reduce((s,c)=>s+c.qty,0);
+// ── MENÜ KARTLARI ─────────────────────────────
+const main = document.getElementById('main');
+cats.forEach(cat => {
+  const catItems = items.filter(i => i.catId === cat.id);
+  if (!catItems.length) return;
+  const sec = document.createElement('div');
+  sec.className = 'cat-section';
+  sec.dataset.cat = cat.id;
+  if (cat.id !== activeCat) sec.style.display = 'none';
+  sec.innerHTML = `<div class="sec-title">${cat.emoji} ${cat.label}</div><div class="items-grid" id="grid-${cat.id}"></div>`;
+  main.appendChild(sec);
 
+  const grid = sec.querySelector('.items-grid');
+  catItems.forEach(item => {
+    const img = IMGS[item.id] || null;
+    const card = document.createElement('div');
+    card.className = 'item-card';
+    card.innerHTML = `
+      ${item.badge ? `<div class="item-badge${item.badge==='EN İYİ'?' best':''}">${item.badge}</div>` : ''}
+      <div class="item-img-wrap">
+        ${img ? `<img class="item-img" src="${img}" alt="${item.name}">` : `<div class="item-emoji">${item.emoji}</div>`}
+      </div>
+      <div class="item-body">
+        <div class="item-name">${item.name}</div>
+        <div class="item-desc">${item.desc}</div>
+        <div class="item-foot">
+          <div class="item-price">₺${item.price}</div>
+          <button class="add-btn" data-id="${item.id}">+ Ekle</button>
+        </div>
+      </div>`;
+    card.querySelector('.add-btn').addEventListener('click', function(){
+      addToCart({ id:item.id, name:item.name, price:item.price, emoji:item.emoji });
+      renderCart();
+      toast(`${item.emoji} Sepete eklendi`);
+      this.textContent='✓'; this.classList.add('ok');
+      setTimeout(()=>{ this.textContent='+ Ekle'; this.classList.remove('ok'); },1200);
+    });
+    grid.appendChild(card);
+  });
+});
+
+// Bilgi kartları
+main.insertAdjacentHTML('beforeend',`
+<div class="info-grid" style="margin-top:28px">
+  <div class="info-card"><div class="info-ico">📍</div><div><div class="info-t">Adres</div><div class="info-v"><a href="https://maps.google.com/?q=${encodeURIComponent(INFO.mapsQuery||INFO.address)}" target="_blank">${INFO.address}</a></div></div></div>
+  <div class="info-card"><div class="info-ico">🕐</div><div><div class="info-t">Saatler</div><div class="info-v">${INFO.hours1}<br>${INFO.hours2}</div></div></div>
+  <div class="info-card"><div class="info-ico">📞</div><div><div class="info-t">Telefon</div><div class="info-v"><a href="tel:${phone}">${INFO.phone}</a></div></div></div>
+  <div class="info-card"><div class="info-ico">💬</div><div><div class="info-t">WhatsApp</div><div class="info-v"><a href="https://wa.me/${wa}" target="_blank">Mesaj Gönder</a></div></div></div>
+</div>`);
+
+// ── ÖDEME SEÇENEKLERİ ─────────────────────────
+let selPayment = 'wa_delivery'; // default
+
+function buildPayOpts() {
+  const opts = [
+    { id:'wa_delivery',  ico:'💵', name:'Kapıda Nakit',    sub:'Teslimatta nakit ödeme',     show: PAY.onDelivery   },
+    { id:'wa_card_del',  ico:'💳', name:'Kapıda Kart',     sub:'Teslimatta kartlı ödeme',    show: PAY.onDeliveryCard},
+    { id:'card_online',  ico:'🏦', name:'Online Kart Ödeme', sub:'Güvenli ödeme sayfasına yönlendirilirsiniz', show: PAY.cardEnabled  },
+  ].filter(o => o.show);
+
+  if (!opts.length) opts.push({ id:'wa_delivery', ico:'💵', name:'Kapıda Nakit', sub:'', show:true });
+  selPayment = opts[0].id;
+
+  const container = document.getElementById('pay-opts');
+  container.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'pay-opt' + (i===0 ? ' sel' : '');
+    el.dataset.id = opt.id;
+    el.innerHTML = `<div class="pay-opt-ico">${opt.ico}</div><div class="pay-opt-info"><div class="pay-opt-name">${opt.name}</div><div class="pay-opt-sub">${opt.sub}</div></div><div class="pay-radio"></div>`;
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('sel'));
+      el.classList.add('sel');
+      selPayment = opt.id;
+      updateOrderBtns();
+    });
+    container.appendChild(el);
+  });
+
+  // Kart butonu görünürlüğü
+  updateOrderBtns();
+}
+
+function updateOrderBtns() {
+  const isCard = selPayment === 'card_online';
+  document.getElementById('order-card-btn').style.display = isCard ? '' : 'none';
+  document.getElementById('order-wa-btn').style.display   = isCard ? 'none' : '';
+}
+
+buildPayOpts();
+
+// ── SEPET ─────────────────────────────────────
+function renderCart() {
+  const cart  = getCart();
+  const count = cartCount(cart);
+  const total = cartTotal(cart);
+  const badge = document.getElementById('cart-badge');
   badge.textContent = count;
   badge.style.display = count > 0 ? 'flex' : 'none';
-  document.getElementById('cart-total-val').textContent = `₺${total.toFixed(0)}`;
-  document.getElementById('checkout-btn').disabled = cart.length === 0;
+  document.getElementById('total-val').textContent = `₺${total.toFixed(0)}`;
+  const disabled = cart.length === 0;
+  document.getElementById('order-wa-btn').disabled   = disabled;
+  document.getElementById('order-card-btn').disabled = disabled;
 
-  const itemsEl = document.getElementById('cart-items');
-  if(cart.length === 0){
-    itemsEl.innerHTML = `<div class="cart-empty"><div class="cart-empty-ico">🛒</div><div>Sepetiniz boş</div><div style="font-size:12px;color:#554433;margin-top:6px">Menüden ürün ekleyin</div></div>`;
+  const el = document.getElementById('drw-items');
+  if (!cart.length) {
+    el.innerHTML = '<div class="cart-empty"><div class="cart-empty-ico">🛒</div><div>Sepetiniz boş</div></div>';
     return;
   }
-  itemsEl.innerHTML = cart.map(c=>`
-    <div class="cart-item" data-id="${c.id}">
-      <div class="ci-emoji">${c.emoji}</div>
-      <div class="ci-info">
+  el.innerHTML = cart.map(c => `
+    <div class="ci">
+      <div class="ci-e">${c.emoji}</div>
+      <div class="ci-inf">
         <div class="ci-name">${c.name}</div>
         <div class="ci-price">₺${(parseFloat(c.price)*c.qty).toFixed(0)}</div>
       </div>
       <div class="ci-qty">
-        <button class="qty-btn" data-action="dec" data-id="${c.id}">−</button>
-        <span class="qty-num">${c.qty}</span>
-        <button class="qty-btn" data-action="inc" data-id="${c.id}">+</button>
+        <button class="qb" data-id="${c.id}" data-a="d">−</button>
+        <span class="qn">${c.qty}</span>
+        <button class="qb" data-id="${c.id}" data-a="i">+</button>
       </div>
     </div>`).join('');
-
-  itemsEl.querySelectorAll('.qty-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const id=btn.dataset.id, action=btn.dataset.action;
-      const cart=getCart(), item=cart.find(c=>c.id===id);
-      if(!item) return;
-      action==='inc' ? updateQty(id,item.qty+1) : updateQty(id,item.qty-1);
+  el.querySelectorAll('.qb').forEach(b => {
+    b.addEventListener('click', () => {
+      const cart2 = getCart();
+      const it    = cart2.find(c => c.id === b.dataset.id);
+      if (!it) return;
+      updateQty(b.dataset.id, b.dataset.a==='i' ? it.qty+1 : it.qty-1);
       renderCart();
     });
   });
 }
 
-function openCart(){
-  document.getElementById('cart-overlay').classList.add('open');
-  document.getElementById('cart-drawer').classList.add('open');
-  renderCart();
-}
-function closeCart(){
-  document.getElementById('cart-overlay').classList.remove('open');
-  document.getElementById('cart-drawer').classList.remove('open');
-}
-function clearCartUI(){
-  clearCart(); renderCart();
-  showToast('Sepet temizlendi');
-}
-function checkout(){
-  const cart = getCart();
-  if(!cart.length) return;
-  const url = buildWhatsAppOrderURL(cart, T);
-  window.open(url,'_blank');
-}
+document.getElementById('cart-fab').addEventListener('click', openCart);
+function openCart()  { document.getElementById('ovl').classList.add('on'); document.getElementById('drawer').classList.add('on'); renderCart(); }
+function closeCart() { document.getElementById('ovl').classList.remove('on'); document.getElementById('drawer').classList.remove('on'); }
+function doClear()   { clearCart(); renderCart(); toast('Sepet temizlendi'); }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
+// WA ile Sipariş
+document.getElementById('order-wa-btn').addEventListener('click', () => {
+  const cart = getCart();
+  if (!cart.length) return;
+  const payMap = { wa_delivery:'delivery', wa_card_del:'card_del' };
+  const url = buildWAUrl(cart, INFO, payMap[selPayment]||'delivery');
+  window.open(url,'_blank');
+  closeCart();
+});
+
+// Online Kart Ödeme
+document.getElementById('order-card-btn').addEventListener('click', () => {
+  if (!PAY.paymentUrl) {
+    toast('Ödeme sayfası henüz ayarlanmadı', true);
+    return;
+  }
+  // Sipariş bilgilerini URL'e ekle
+  const cart  = getCart();
+  const total = cartTotal(cart).toFixed(0);
+  const url   = PAY.paymentUrl + (PAY.paymentUrl.includes('?') ? '&' : '?') + `amount=${total}&ref=${Date.now()}`;
+  window.open(url,'_blank');
+  // WA'ya da sipariş bildir
+  const waUrl = buildWAUrl(cart, INFO, 'card');
+  setTimeout(() => window.open(waUrl,'_blank'), 600);
+});
+
+function toast(msg, err=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'on' + (err ? ' err' : '');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.className = '', 2200);
 }
 
 renderCart();
